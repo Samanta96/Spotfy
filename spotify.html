@@ -13,7 +13,10 @@
             _ID;
             genero;
 
-            constructor(){ 
+            constructor(nombre="",duracion=0,genero=""){ 
+                this.nombre=nombre
+                this.duracion=duracion
+                this.genero=genero
             }
 
             set setID(id){ 
@@ -21,7 +24,7 @@
             }
 
             get getID(){ 
-            return _ID=num+1
+            return _ID
             }
 
            
@@ -31,15 +34,10 @@
             actual;//ID de la cacion seleccionada
             play=false //Boleana  por defeto es false
             listaDePlayList=[] //Cada elemento de este arreglo es a su vez un arrelgo que cotiene nombre y un arreglo con los numero de las canciones
-            constructor(){
-            }
+           
             agregarcancion(cancion,Num){//(CANCION)	Agregar las canciones al arreglo de lista de canciones
-                cancion.nombre=window.prompt("Escrbe el nombre de la cancion")
-                cancion.duracion=window.prompt("Escrbe la duracion de la cancion")
-                cancion.setID=Num
-                cancion.genero=window.prompt("Escrbe el genero de la cancion")
-                this.listadecanciones.push(cancion)
-                console.log(this.listadecanciones)
+               cancion.setID=Num
+               this.listadecanciones.push(cancion)
             }
             mostrarCanciones(){ //Iprimir nombre de las canciones del arreglo listadecancione y el id
 
@@ -77,16 +75,55 @@ verCatalogoAlfabetico(mayor){
 function imprimirMenu(){ 
 }
 
-let cancion= new Cancion(Numero_canciones);
+let cancion1= new Cancion("AMIGO",3,"BALADA")
+let cancion2= new Cancion("ME LLAMAS",3,"BALADA")
+let cancion3= new Cancion("CACHETE, PECHITO, OMBLIGO",2,"CUMBIA")
+let cancion4= new Cancion("AMERICA",3,"BALADA")
+let	cancion5= new Cancion("BAILA MORENA",3,"RUMBA")
+let	cancion6= new Cancion("LET IT BE",3,"B. INGLES")
+let	cancion7= new Cancion("ANGIE",4,"B. INGLES")
+let	cancion8 = new Cancion("UN BESO Y UNA FLOR",3,"BALADA")
+let	cancion9 = new Cancion("CORAZON SALVAJE",2,"CUMBIA")
+let	cancion10 =	new	Cancion("GREASE",3,"ROCK")
+let	cancion11 =	new	Cancion("HOTEL CALIFORNIA",3,"B. INGLES")
+let	cancion12 =	new	Cancion("MACARENA",4,"RUMBA")
+let	cancion13 =	new	Cancion("POPOTITOS",3,"ROCK")
+let	cancion14 =	new	Cancion("SANTA LUCIA",3,"BALADA")
+let	cancion15 =	new	Cancion("SE FUE",4,"BALADA")
 let reproductor= new Reproductor();
-let añadir_cancion
-alert("añade una cancion a a tu lsta de canciones")
-do {
- Numero_canciones++
- console.log(Numero_canciones)
- reproductor.agregarcancion(cancion,Numero_canciones)
- añadir_cancion= window.prompt("Deseas añadir otra cancion s/n")
-} while (añadir_cancion=="s");
+Numero_canciones++
+reproductor.agregarcancion(cancion1,Numero_canciones);
+Numero_canciones++
+reproductor.agregarcancion(cancion2,Numero_canciones);
+Numero_canciones++
+reproductor.agregarcancion(cancion3,Numero_canciones);
+Numero_canciones++
+reproductor.agregarcancion(cancion4,Numero_canciones);
+Numero_canciones++
+reproductor.agregarcancion(cancion5,Numero_canciones);
+Numero_canciones++
+reproductor.agregarcancion(cancion6,Numero_canciones);
+Numero_canciones++
+reproductor.agregarcancion(cancion7,Numero_canciones);
+Numero_canciones++
+reproductor.agregarcancion(cancion8,Numero_canciones);
+Numero_canciones++
+reproductor.agregarcancion(cancion9,Numero_canciones);
+Numero_canciones++
+reproductor.agregarcancion(cancion10,Numero_canciones);
+Numero_canciones++
+reproductor.agregarcancion(cancion11,Numero_canciones);
+Numero_canciones++
+reproductor.agregarcancion(cancion12,Numero_canciones);
+Numero_canciones++
+reproductor.agregarcancion(cancion13,Numero_canciones);
+Numero_canciones++
+reproductor.agregarcancion(cancion14,Numero_canciones);
+Numero_canciones++
+reproductor.agregarcancion(cancion15,Numero_canciones);
+
+
+
 
 
     </script>
