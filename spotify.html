@@ -33,62 +33,58 @@
             listaDePlayList=[] //Cada elemento de este arreglo es a su vez un arrelgo que cotiene nombre y un arreglo con los numero de las canciones
             constructor(){
             }
-            agregarcancion(cancion,Num){//(CANCION)	Agregar las canciones al arreglo de lista de canciones
-                cancion.nombre=window.prompt("Escrbe el nombre de la cancion")
-                cancion.duracion=window.prompt("Escrbe la duracion de la cancion")
-                cancion.setID=Num
-                cancion.genero=window.prompt("Escrbe el genero de la cancion")
-                this.listadecanciones.push(cancion)
+            agregarcancion(Num){//(CANCION)	Agregar las canciones al arreglo de lista de canciones
+                for(let m=0;m<Num;m++){
+                    let cancion= new Cancion()
+                    cancion.nombre=window.prompt("Escrbe el nombre de la cancion")
+                    cancion.duracion=window.prompt("Escrbe la duracion de la cancion")
+                    cancion.setID=m+1
+                    cancion.genero=window.prompt("Escrbe el genero de la cancion")
+                    this.listadecanciones.push(cancion)    
+                }
                 console.log(this.listadecanciones)
             }
             mostrarCanciones(){ //Iprimir nombre de las canciones del arreglo listadecancione y el id
-
+                console.log("Lista de canciones")
+                this.listadecanciones.forEach(elemento => console.log(elemento._ID+" "+elemento.nombre))
             }	
             seleccionarCancion(id){ 
 
             }//El metodo le pide al usuario el id de la cnacion selecionada
             play(){ 
 
-}	//setea play a true
-stop(){ 
+            }	//setea play a true
+            stop(){ 
 
-}	//setea play a false
-buscar() { 
+            }	//setea play a false
+            buscar() { 
 
-} //(cancion:string):ID de la cancion o falso	Pedir al usuario el nombre de la cancion. Va buscar en la listadecanciones cancion por cancion si hay alguan que concida con el nombre que ingreso el usuario
-crearListaDeReproducion(nombre,arregloDecanciones){ 
+            } //(cancion:string):ID de la cancion o falso	Pedir al usuario el nombre de la cancion. Va buscar en la listadecanciones cancion por cancion si hay alguan que concida con el nombre que ingreso el usuario
+            crearListaDeReproducion(nombre,arregloDecanciones){ 
 
-} //Pedir el nombre y le voy a pedir los nuemros de las canciones separados por coma para hacer una arreglo de esas canciones y guardaro. 
-seleccionarPlaylist(nombre){ 
+            } //Pedir el nombre y le voy a pedir los nuemros de las canciones separados por coma para hacer una arreglo de esas canciones y guardaro. 
+            seleccionarPlaylist(nombre){ 
 
-}	//Recibe el nombre y busca en listaDeplayLista si la enceuntra escribe el nombre de cada cancion y si nola encuentra regresa falso 
-imprimirCatalogo(){ 
+            }	//Recibe el nombre y busca en listaDeplayLista si la enceuntra escribe el nombre de cada cancion y si nola encuentra regresa falso 
+            imprimirCatalogo(){ 
 
-}//Mostrar nombre duracion y id de listadecanciones
-verCatalogoDuarcion(mayor){ 
+            }//Mostrar nombre duracion y id de listadecanciones
+            verCatalogoDuarcion(mayor){ 
 
-}//Si mayor es true voy a imprimr las caciones de mayor a menor duracion de listadecanciones si es falso las imprimo alrreves
-verCatalogoAlfabetico(mayor){ 
+            }//Si mayor es true voy a imprimr las caciones de mayor a menor duracion de listadecanciones si es falso las imprimo alrreves
+            verCatalogoAlfabetico(mayor){ 
 
-}//Si mayor es tru voy a imprimr las caciones de mayor a menor duracion de listadecanciones si es falso las imprimo alrreves
+            }//Si mayor es tru voy a imprimr las caciones de mayor a menor duracion de listadecanciones si es falso las imprimo alrreves
 
-}
+        }
 
-function imprimirMenu(){ 
-}
+        function imprimirMenu(){ 
+        }
 
-let cancion= new Cancion(Numero_canciones);
-let reproductor= new Reproductor();
-let añadir_cancion
-alert("añade una cancion a a tu lsta de canciones")
-do {
- Numero_canciones++
- console.log(Numero_canciones)
- reproductor.agregarcancion(cancion,Numero_canciones)
- añadir_cancion= window.prompt("Deseas añadir otra cancion s/n")
-} while (añadir_cancion=="s");
-
-
+        let reproductor= new Reproductor();
+        Numero_canciones=window.prompt("Ingrese el numero de cancones qe va añadir")
+        reproductor.agregarcancion(Numero_canciones)
+        reproductor.mostrarCanciones()
     </script>
 </body>
 </html>
