@@ -13,15 +13,18 @@
             _ID;
             genero;
 
-            constructor(){ 
+            constructor(nombre="",duracion=0,genero=""){ 
+                this.nombre=nombre;
+                this.duracion=duracion;
+                this.genero=genero;
             }
-
+            
             set setID(id){ 
-            this._ID=id
+                    this._ID=id+1   
             }
 
             get getID(){ 
-            return _ID=num+1
+            return this._ID
             }
 
            
@@ -31,41 +34,71 @@
             actual;//ID de la cacion seleccionada
             play=false //Boleana  por defeto es false
             listaDePlayList=[] //Cada elemento de este arreglo es a su vez un arrelgo que cotiene nombre y un arreglo con los numero de las canciones
-            constructor(){
-            }
-            agregarcancion(Num){//(CANCION)	Agregar las canciones al arreglo de lista de canciones
-                for(let m=0;m<Num;m++){
+            agregarcancion(cancion){//(CANCION)	Agregar las canciones al arreglo de lista de canciones
+                /*for(let m=0;m<Num;m++){
                     let cancion= new Cancion()
                     cancion.nombre=window.prompt("Escrbe el nombre de la cancion")
                     cancion.duracion=window.prompt("Escrbe la duracion de la cancion")
                     cancion.setID=m+1
                     cancion.genero=window.prompt("Escrbe el genero de la cancion")
-                    this.listadecanciones.push(cancion)    
-                }
+                    this.listadecanciones.push(cancion) 
+                } */ 
+                cancion.setID=this.listadecanciones.length
+                this.listadecanciones.push(cancion) 
+               
                 console.log(this.listadecanciones)
+                
             }
-            mostrarCanciones(){ //Iprimir nombre de las canciones del arreglo listadecancione y el id
+            //Iprimir nombre de las canciones del arreglo listadecancione y el id
+            mostrarCanciones(){ 
                 console.log("Lista de canciones")
                 this.listadecanciones.forEach(elemento => console.log(elemento._ID+" "+elemento.nombre))
+            }
+            //El metodo le pide al usuario el id de la cnacion selecionada
+            seleccionarCancion(id){  
+                this.actual=id 
+            }
+            //setea play a true
+            Play(){ 
+                this.play = true 
+                console.log("La cancion "+this.listadecanciones[this.actual].nombre+" se esta reproduciendo")
             }	
-            seleccionarCancion(id){ 
-
-            }//El metodo le pide al usuario el id de la cnacion selecionada
-            play(){ 
-
-            }	//setea play a true
+            //setea play a false
             stop(){ 
-
-            }	//setea play a false
-            buscar() { 
-
-            } //(cancion:string):ID de la cancion o falso	Pedir al usuario el nombre de la cancion. Va buscar en la listadecanciones cancion por cancion si hay alguan que concida con el nombre que ingreso el usuario
+                this.play = false
+                console.log("La cancion "+this.listadecanciones[this.actual].nombre+" se pauso")
+            }	
+            /*(cancion:string):ID de la cancion o falso	Pedir al usuario el nombre de la cancion. Va buscar en la listadecanciones cancion por cancion 
+            si hay alguan que concida con el nombre que ingreso el usuario*/
+            buscar(nombreCancion) { 
+                let idcancion=this.listadecanciones.findIndex(elemento => elemento.nombre==nombreCancion)
+                return idcancion!=-1 ?  console.log("El id de la camcion selecconada es: "+this.listadecanciones[idcancion]._ID): console.log("falso")
+            } 
+            /*Pedir el nombre y le voy a pedir los nuemros de las canciones 
+            separados por coma para hacer una arreglo de esas canciones y guardaro. */
             crearListaDeReproducion(nombre,arregloDecanciones){ 
+                    let miMusica={name:nombre , id:arregloDecanciones }
+                    this.listaDePlayList.push(miMusica)        
+            } 
 
-            } //Pedir el nombre y le voy a pedir los nuemros de las canciones separados por coma para hacer una arreglo de esas canciones y guardaro. 
+            /*Recibe el nombre y busca en listaDeplayLista si
+             la enceuntra escribe el nombre de cada cancion y 
+             si nola encuentra regresa falso */
             seleccionarPlaylist(nombre){ 
-
-            }	//Recibe el nombre y busca en listaDeplayLista si la enceuntra escribe el nombre de cada cancion y si nola encuentra regresa falso 
+                let indice=this.listaDePlayList.findIndex(elemento => elemento.name==nombre)
+                if (indice!=-1){
+                    let encontrarPlayist=this.listaDePlayList[indice].id
+                    encontrarPlayist.forEach(elemento => {
+                        this.listadecanciones.forEach(c =>{
+                            if (elemento==c._ID){
+                                console.log(c.nombre)
+                            }
+                    } )
+                 })
+                }else{
+                    console.log("falso")
+                }
+            }	
             imprimirCatalogo(){ 
 
             }//Mostrar nombre duracion y id de listadecanciones
@@ -80,11 +113,38 @@
 
         function imprimirMenu(){ 
         }
-
+        //main
+        let cancion1= new Cancion("LA BACHATA",3,"BAHATA")
+        let cancion2= new Cancion("MACARENA",3,"flamncopop")
+        let cancion3= new Cancion("TTI ME PREGUNTO",3,"REGUETON")
         let reproductor= new Reproductor();
-        Numero_canciones=window.prompt("Ingrese el numero de cancones qe va añadir")
-        reproductor.agregarcancion(Numero_canciones)
+        //Numero_canciones=window.prompt("Ingrese el numero de canciones que vas añadir")
+        reproductor.agregarcancion(cancion1)
+        console.log(Numero_canciones=cancion1.getID)
+        reproductor.agregarcancion(cancion2)
+        console.log(Numero_canciones=cancion2.getID)
+        reproductor.agregarcancion(cancion3)
+        console.log(Numero_canciones=cancion3.getID)
         reproductor.mostrarCanciones()
+        /*let cancionSeleccionada=window.prompt("Seleccione el id de la canción que desea escuchar")
+        reproductor.seleccionarCancion(cancionSeleccionada)
+        reproductor.Play()
+        reproductor.stop()*/
+        //let nombre_cancion=window.prompt("Escriba el nombre e la canción")
+        //reproductor.buscar(nombre_cancion)
+        let arregloDecanciones=[], nombre
+        let respuesta
+        do {
+            let nombre=window.prompt("Escribe el nombre de la lista de reprodccón que deseas crear")
+            cancionesPlayist=window.prompt("Escribe el id de las canciones que vas añadir em la lsta de reprodccion ")
+            arregloDecanciones=cancionesPlayist.split(",")
+            reproductor.crearListaDeReproducion(nombre,arregloDecanciones)
+            respuesta=window.prompt("Deseas a;adr otra lsta de reproduccon S/N")
+        } while (respuesta=="S");
+        console.log("Lista de Playlist ")
+        console.log(reproductor.listaDePlayList)
+        let nombrePlaylist=window.prompt("Escribe el nombre de la Playlist")
+        reproductor.seleccionarPlaylist(nombrePlaylist)
     </script>
 </body>
 </html>
