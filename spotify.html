@@ -15,6 +15,7 @@
         function imprimirMenu(op){ 
             alert("MENU DEL REPRODUCTOR \n1.BUSCAR CANCION\n2.PARAR CANCION\n3.REPRODUCIR\n4.CREAR LISTA DE REPRODUCCION\n5.SELECCIONAR LISTA DE REPRODUCIION\n6.IMPRMIR CATALOGO DE LA LISTA DE CANCIONES\n7.VER CATALOGO DE DURACION\n8.VER CATALOGO ALFABETICO\n9.SALIR")
         }
+        
         class Cancion{
             nombre;
             duracion;
@@ -79,7 +80,10 @@
             /*Pedir el nombre y le voy a pedir los nuemros de las canciones 
             separados por coma para hacer una arreglo de esas canciones y guardaro. */
             crearListaDeReproducion(nombre,arregloDecanciones){ 
+                /*obejeto que almacena el nombre de la lista de reproduccion(listPLAYLIST)
+                  y el arreglo de ids de las canciones de la lsta de reproduccon creada*/
                 let miMusica={name:nombre , id:arregloDecanciones }
+                //cada obejeto del playlist se guarda en la listaDePlaylist
                 this.listaDePlayList.push(miMusica)        
             } 
 
@@ -87,10 +91,14 @@
              la enceuntra escribe el nombre de cada cancion y 
              si nola encuentra regresa falso */
             seleccionarPlaylist(nombre){ 
+                //Busca el nombre de playlist en el arreglo lista de playlist si la encentra indice va a guardar la posicion del nombre
                 let indice=this.listaDePlayList.findIndex(elemento => elemento.name==nombre)
+                //codgo para mrmr el nombre de cada cancion
                 if (indice!=-1){
-                    let encontrarPlayist=this.listaDePlayList[indice].id
-                    encontrarPlayist.forEach(elemento => {
+                    let ArrayIdencontrado=this.listaDePlayList[indice].id
+                    /*compara si los id del ArrayIdencontrados conciden con los id 
+                    en la lista de canciones prme el nombre de la cancion*/
+                    ArrayIdencontrado.forEach(elemento => {
                         this.listadecanciones.forEach(c =>{
                             if (elemento==c._ID){
                                 console.log(c.nombre)
