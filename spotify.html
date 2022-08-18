@@ -6,7 +6,7 @@
 </head>
 <body>
     <script>
-        let Numero_canciones=0
+        var Numero_canciones=0
         //CREAR MENU
         function imprimirMenu(op){ 
             alert("MENU DEL REPRODUCTOR \n1.BUSCAR CANCION\n2.PARAR CANCION\n3.REPRODUCIR\n4.CREAR LISTA DE REPRODUCCION\n5.SELECCIONAR LISTA DE REPRODUCIION\n6.IMPRMIR CATALOGO DE LA LISTA DE CANCIONES\n7.VER CATALOGO DE DURACION\n8.VER CATALOGO ALFABETICO\n9.SALIR")
@@ -20,12 +20,10 @@
                 this.nombre=nombre;
                 this.duracion=duracion;
                 this.genero=genero;
+                this._ID=Numero_canciones
             }
             set setID(id){ 
-                    this._ID=id+1   
-            }
-            get getID(){ 
-            return this._ID
+                       
             }
         }
         class Reproductor{
@@ -33,19 +31,24 @@
             actual;//ID de la cacion seleccionada
             play=false //Boleana  por defeto es false
             listaDePlayList=[] //Cada elemento de este arreglo es a su vez un arrelgo que cotiene nombre y un arreglo con los numero de las canciones
+            constructor(){
+            }
             agregarcancion(cancion){//(CANCION)	Agregar las canciones al arreglo de lista de canciones
-                cancion.setID=this.listadecanciones.length
+                //cancion.setID=this.listadecanciones.length
                 this.listadecanciones.push(cancion) 
             }
+
             //Iprimir nombre de las canciones del arreglo listadecancione y el id
             mostrarCanciones(){ 
                 console.log("Lista de canciones")
                 this.listadecanciones.forEach(elemento => console.log(elemento._ID+" "+elemento.nombre))
             }
+
             //El metodo le pide al usuario el id de la cnacion selecionada
             seleccionarCancion(id){  
                 this.actual=id 
             }
+
             //setea play a true
             Play(){ 
                 this.play = true 
@@ -53,6 +56,7 @@
                 let posicion=this.listadecanciones.findIndex(elemento => elemento._ID==this.actual)
                 console.log("La cancion "+this.listadecanciones[posicion].nombre+" se esta reproduciendo")
             }	
+            
             //setea play a false
             stop(){ 
                 this.play = false
@@ -60,17 +64,19 @@
                 console.log("play: "+this.play)
                 console.log("La cancion "+this.listadecanciones[posicion].nombre +" se pauso")
             }	
+            
             /*(cancion:string):ID de la cancion o falso	Pedir al usuario el nombre de la cancion. Va buscar en la listadecanciones cancion por cancion 
             si hay alguan que concida con el nombre que ingreso el usuario*/
             buscar(nombreCancion) { 
                 let idcancion=this.listadecanciones.findIndex(elemento => elemento.nombre==nombreCancion)
                 return idcancion!=-1 ?  console.log("El id de la cancion selecconada es: "+this.listadecanciones[idcancion]._ID): console.log("falso")
             } 
+            
             /*Pedir el nombre y le voy a pedir los nuemros de las canciones 
             separados por coma para hacer una arreglo de esas canciones y guardaro. */
             crearListaDeReproducion(nombre,arregloDecanciones){ 
-                    let miMusica={name:nombre , id:arregloDecanciones }
-                    this.listaDePlayList.push(miMusica)        
+                let miMusica={name:nombre , id:arregloDecanciones }
+                this.listaDePlayList.push(miMusica)        
             } 
 
             /*Recibe el nombre y busca en listaDeplayLista si
@@ -85,12 +91,13 @@
                             if (elemento==c._ID){
                                 console.log(c.nombre)
                             }
-                    } )
-                 })
+                        } )
+                    })
                 }else{
                     console.log("falso")
                 }
             }	
+            
             //Mostrar nombre duracion y id de listadecanciones
             imprimirCatalogo(){ 
                 console.log("Catalogo de canciones")
@@ -98,11 +105,12 @@
             }
             //Si mayor es true voy a imprimr las caciones de mayor a menor duracion de listadecanciones si es falso las imprimo alrreves
             verCatalogoDuarcion(mayor){  
-                if(mayor==true){
-                let listaBackup=[]
+                var listaBackup=[]
+                console.log(mayor)
                 for(let i=0;i<this.listadecanciones.length;i++){
                     listaBackup[i]=this.listadecanciones[i]
                 }
+                if(mayor==true){
                     listaBackup.sort((a,b)=>{
                         if(a.duracion>b.duracion){
                             return -1
@@ -117,15 +125,27 @@
                 })
                 console.log(listaBackup)
               }else{
-                console.log(this.listadecanciones.reverse())
-              } 
-            }
+                    listaBackup.sort((a,b)=>{
+                        if(a.duracion<b.duracion){
+                            return -1
+                        }
+                        if(a.duracion>b.duracion){
+                            return 1
+                        }
+
+                        if(a.duracion==b.duracion){
+                            return 0
+                        }
+                    })
+                    console.log(listaBackup)
+                }
+                } 
             verCatalogoAlfabetico(mayor){ 
-                if(mayor==true){
-                    let listaBackup2=[]
+                var listaBackup2=[]
                     for(let i=0;i<this.listadecanciones.length;i++){
                         listaBackup2[i]=this.listadecanciones[i]
                     }
+                if(mayor==true){
                         listaBackup2=this.listadecanciones
                         listaBackup2.sort((a,b)=>{
                             if(a.nombre>b.nombre){
@@ -141,59 +161,71 @@
                     })
                     console.log(listaBackup2)
                 }else{
-                    console.log(this.listadecanciones.reverse())
-              } 
-            }//Si mayor es tru voy a imprimr las caciones de mayor a menor duracion de listadecanciones si es falso las imprimo alrreves
+                     listaBackup2.sort((a,b)=>{
+                            if(a.nombre<b.nombre){
+                                return -1
+                            }
+                            if(a.nombre>b.nombre){
+                                return 1
+                            }
+                            if(a.nombre==b.nombre){
+                                return 0
+                            }
+                    })
+                    console.log(listaBackup2)
+                }
+              } //Si mayor es tru voy a imprimr las caciones de mayor a menor duracion de listadecanciones si es falso las imprimo alrreves
 
         }
         //CREAR CANCIONES 
+        Numero_canciones++
         let cancion1= new Cancion("AMIGO",3,"BALADA")
+        Numero_canciones++
         let cancion2= new Cancion("ME LLAMAS",3,"BALADA")
+        Numero_canciones++
         let cancion3= new Cancion("CACHETE, PECHITO, OMBLIGO",2,"CUMBIA")
+        Numero_canciones++
         let cancion4= new Cancion("AMERICA",3,"BALADA")
+        Numero_canciones++
         let	cancion5= new Cancion("BAILA MORENA",3,"RUMBA")
+        Numero_canciones++
         let	cancion6= new Cancion("LET IT BE",3,"B. INGLES")
+        Numero_canciones++
         let	cancion7= new Cancion("ANGIE",4,"B. INGLES")
+        Numero_canciones++
         let	cancion8 = new Cancion("UN BESO Y UNA FLOR",3,"BALADA")
+        Numero_canciones++
         let	cancion9 = new Cancion("CORAZON SALVAJE",2,"CUMBIA")
+        Numero_canciones++
         let	cancion10 =	new	Cancion("GREASE",3,"ROCK")
+        Numero_canciones++
         let	cancion11 =	new	Cancion("HOTEL CALIFORNIA",3,"B. INGLES")
-        let	cancion12 =	new	Cancion("POPOTITOS",3,"ROCK")
+        Numero_canciones++
+        let	cancion12 =	new	Cancion("POPOTITOS",1,"ROCK")
+        Numero_canciones++
         let cancion13= new Cancion("LA BACHATA",3,"BAHATA")
+        Numero_canciones++
         let cancion14= new Cancion("MACARENA",4,"RUMBA")
+        Numero_canciones++
         let cancion15= new Cancion("OJITOS LINDOS",4,"REGUETON")
+       
         //AGREGAR LAS CANCIONES A LA LISTA DE CANCIONES
         let reproductor= new Reproductor();
         reproductor.agregarcancion(cancion1)
-        console.log("Numero de canciones: "+ (Numero_canciones=cancion1.getID))
         reproductor.agregarcancion(cancion2)
-        console.log("Numero de canciones: "+(Numero_canciones=cancion2.getID))
         reproductor.agregarcancion(cancion3)
-        console.log("Numero de canciones: "+(Numero_canciones=cancion3.getID))
         reproductor.agregarcancion(cancion4);
-        console.log("Numero de canciones: "+ (Numero_canciones=cancion4.getID))
         reproductor.agregarcancion(cancion5);
-        console.log("Numero de canciones: "+ (Numero_canciones=cancion5.getID))
         reproductor.agregarcancion(cancion6);
-        console.log("Numero de canciones: "+ (Numero_canciones=cancion6.getID))
         reproductor.agregarcancion(cancion7);
-        console.log("Numero de canciones: "+ (Numero_canciones=cancion7.getID))
         reproductor.agregarcancion(cancion8);
-        console.log("Numero de canciones: "+ (Numero_canciones=cancion8.getID))
         reproductor.agregarcancion(cancion9);
-        console.log("Numero de canciones: "+ (Numero_canciones=cancion9.getID))
         reproductor.agregarcancion(cancion10);
-        console.log("Numero de canciones: "+ (Numero_canciones=cancion10.getID))
         reproductor.agregarcancion(cancion11);
-        console.log("Numero de canciones: "+ (Numero_canciones=cancion11.getID))
         reproductor.agregarcancion(cancion12);
-        console.log("Numero de canciones: "+ (Numero_canciones=cancion12.getID))
         reproductor.agregarcancion(cancion13);
-        console.log("Numero de canciones: "+ (Numero_canciones=cancion13.getID))
         reproductor.agregarcancion(cancion14);
-        console.log("Numero de canciones: "+ (Numero_canciones=cancion14.getID))
         reproductor.agregarcancion(cancion15);
-        console.log("Numero de canciones: "+ (Numero_canciones=cancion15.getID))
         let op
         //INTERACTUAR CON EL MENU
         do {
@@ -224,7 +256,7 @@
                         respuesta=window.prompt("Deseas añadir otra lista de reproduccion S/N")
                     } while (respuesta=="S");
                     console.log("Lista de Playlists ")
-                    console.log(reproductor.listaDePlayList)
+                    reproductor.listaDePlayList.forEach(elemento => console.log("Nombre Playlist: "+elemento.name+" ID de cancones: "+elemento.id))
                     break;
                 case "5":
                     let nombrePlaylist=window.prompt("Escribe el nombre de la lista de reproduccion")
